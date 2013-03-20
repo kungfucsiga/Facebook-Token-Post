@@ -65,22 +65,22 @@ $user = $facebook->getUser();
             <?php if($user): ?>
             
                 <?php 
-                // csiga a user
-                $fb_id = '1204770767';
-                $fb_user_profile = $facebook->api('/' . $fb_id);
+                
+                $fb_user_profile = $facebook->api('/1204770767');
+                // print_r($fb_user_profile);
                 $access_token = $facebook->getAccessToken();
                 echo "Rövid acccess token:";
                 echo '<br />';
                 echo $access_token;
                 echo '<br />';
                 echo '<br />';
-                
+
                 // meghosszabítva
                 $extend_url = "https://graph.facebook.com/oauth/access_token?client_id=551406854880927&client_secret=13e35a0667d10fa5af7ec8db822304fe&grant_type=fb_exchange_token&fb_exchange_token=$access_token";
                 $resp = file_get_contents($extend_url);
                 parse_str($resp,$output);
                 $extended_token = $output['access_token'];
-                echo 'Meghosszabítva (EZT HASZNÁLJUK A POSTHOZ!!!):';
+                echo 'Meghosszabítva:';
                 echo '<br />';
                 echo $extended_token;
                 echo '<br />';
@@ -90,11 +90,11 @@ $user = $facebook->getUser();
 
                 <?php 
                 
-                $ret_obj = $facebook->api("/$fb_id/feed", 'POST',
+                $ret_obj = $facebook->api('/me/feed', 'POST',
                 array(
                   'access_token' => $extended_token,
                   'link' => 'http://test.hu',
-                  'message' => 'Tesztezek, juhúúúú! Ádámmal írtam.'
+                  'message' => 'Ismét tesztelek, juhúúúú! Ádámmal írtam.'
                 ));
                 ?>
 
